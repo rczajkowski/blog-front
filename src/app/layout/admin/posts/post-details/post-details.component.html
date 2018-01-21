@@ -1,0 +1,27 @@
+<p-fieldset>
+    <p-header>Edit post</p-header>
+    <form role="form">
+        <fieldset class="form-group">
+            <label>Title</label>
+            <input class="form-control" [(ngModel)]="editedPost.title" name="title" placeholder="Title...">
+        </fieldset>
+
+        <fieldset class="form-group">
+            <p-calendar [(ngModel)]="editedPost.date" name="date" showTime="true" hourFormat="24"></p-calendar>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <p-multiSelect [options]="categoriesSelect" [(ngModel)]="editedPost.categories" name="categories"></p-multiSelect>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <p-multiSelect [options]="tagsSelect" [(ngModel)]="editedPost.tags" name="tags"></p-multiSelect>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Content:</label>
+            <textarea class="form-control" [(ngModel)]="editedPost.content" name="content" rows="3"></textarea>
+        </fieldset>
+        <button class="btn-success btn" (click)="updatePost()">Edit</button>
+    </form>
+</p-fieldset>

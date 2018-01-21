@@ -1,0 +1,16 @@
+<div [@routerTransition]>
+    <h1 class="text-center">{{category.name}}</h1>
+    <div class="container">
+        <div class="row mt-3" *ngFor="let post of posts">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>{{post.title}}</h1>
+                        <h3 class="pl-5">{{post.briefInfo}}</h3>
+                        <a routerLink="/posts/{{post.postId}}">read more...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

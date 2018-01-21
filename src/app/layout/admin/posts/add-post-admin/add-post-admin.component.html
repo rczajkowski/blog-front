@@ -1,0 +1,62 @@
+<p-fieldset collapsed="false">
+    <p-header>Add new post</p-header>
+    <form role="form" #postForm="ngForm">
+        <fieldset class="form-group">
+            <label>Title</label>
+            <input class="form-control" [(ngModel)]="post.title" name="title" placeholder="Title..." required>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Brief info</label>
+            <input class="form-control" [(ngModel)]="post.briefInfo" name="title" placeholder="Brief info..." required>
+        </fieldset>
+
+        <fieldset class="form-group">
+        <p-multiSelect [options]="categoriesSelect" [defaultLabel]="'Choose categories'" [(ngModel)]="post.categories" name="categories" [panelStyle]="{minWidth:'12em'}"></p-multiSelect>
+        </fieldset>
+
+        <fieldset class="form-group">
+        <p-multiSelect [options]="tagsSelect" [defaultLabel]="'Choose tags'" [(ngModel)]="post.tags" name="tags" [panelStyle]="{minWidth:'12em'}"></p-multiSelect>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label>Content:</label>
+            <textarea class="form-control" [(ngModel)]="post.content" name="content" rows="3" required></textarea>
+        </fieldset>
+        <button class="btn-success btn" (click)="createPost()" [disabled]="isInvalid() || postForm.invalid">Dodaj</button>
+    </form>
+</p-fieldset>
+<div class="card mb-3 mt-3">
+    <div class="card-header">Posts</div>
+    <div class="card-body table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Categories</th>
+                <th>Tags</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="clickable" *ngFor="let post of allPosts">
+                    <td>{{post.title}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-info" *ngFor="let category of post.categories" routerLink="/admin/category/{{category.categoryId}}">
+                            {{category.name}}
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-success" *ngFor="let tag of post.tags" routerLink="/admin/tag/{{tag.tagId}}">
+                            {{tag.tagName}}
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-warning" routerLink="/admin/post/{{post.postId}}">Edit</button>
+                        <button class="btn btn-danger" (click)="deletePost(post.postId)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

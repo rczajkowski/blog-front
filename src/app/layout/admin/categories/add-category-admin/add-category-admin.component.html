@@ -1,0 +1,35 @@
+<p-fieldset collapsed="false">
+    <p-header>Add new category</p-header>
+    <form role="form" #categoryForm="ngForm">
+        <fieldset class="form-group">
+            <label>Category name</label>
+            <input class="form-control" [(ngModel)]="category.name" name="tag" placeholder="Category name..." required>
+        </fieldset>
+        <button class="btn btn-success" [disabled]="categoryForm.invalid" (click)="createCategory()">Dodaj</button>
+    </form>
+</p-fieldset>
+
+<div class="card mb-3 mt-3">
+    <div class="card-header">Tags</div>
+    <div class="card-body table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Category name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="clickable" *ngFor="let category of allCategories">
+                <td>
+                    {{category.name}}
+                </td>
+                <td>
+                    <button class="btn btn-warning" routerLink="/admin/category/{{category.categoryId}}">Edit</button>
+                    <button class="btn btn-danger" (click)="deleteCategory(category.categoryId)">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

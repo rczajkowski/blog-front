@@ -1,0 +1,52 @@
+<div [@routerTransition]>
+    <div class="row">
+        <div class="col-md-12">
+            <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let slider of sliders">
+                    <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%">
+                    <div class="carousel-caption">
+                        <h3>{{slider.label}}</h3>
+                        <p>{{slider.text}}</p>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    </div>
+    <h1 class="text-center mt-3">Newest posts</h1>
+    <div class="card-body">
+        <ul class="timeline">
+            <li class="{{i%2 == 0 ? 'timeline' : 'timeline-inverted'}}" *ngFor="let post of newestPosts; let i = index">
+                <div class="timeline-badge success"><i class="fa fa-check"></i>
+                </div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4 class="timeline-title">{{post.title}}</h4>
+                    </div>
+                    <div class="timeline-body">
+                        {{post.briefInfo}}
+                    </div>
+                    <div>
+                        <a routerLink="/posts/{{post.postId}}">read more...</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-10">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Tag cloud</h1>
+                    <span *ngFor="let oneTag of tags" ngClass="{{setClassForTag(oneTag)}}"><a routerLink="/tags/{{oneTag.tagId}}">{{oneTag.tagName}}</a>&nbsp;</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2 text-center">
+            <div class="form-group">
+                <input type="email" [(ngModel)]="email" name="email" class="form-control input-underline input-lg" placeholder="email..." email required>
+            </div>
+            <a class="btn rounded-btn" (click)="subscribeNewsletter()">Subscribe</a>
+        </div>
+    </div>
+</div>

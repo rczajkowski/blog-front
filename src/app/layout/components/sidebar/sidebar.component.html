@@ -1,0 +1,98 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+    <div *ngIf="!isAdminSite(); else adminSiteBlock">
+    <div class="list-group">
+        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;Dashboard
+        </a>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('pages')">
+                <span><i class="fa fa-tags"></i>&nbsp;Categories</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages'">
+                <ul class="submenu">
+                    <li *ngFor="let category of categories">
+                        <a routerLink="/category/{{category.categoryId}}"><span>{{category.name}}</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <a [routerLink]="['/support']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dollar"></i>&nbsp;Donate
+        </a>
+    </div>
+    <div class="header-fields">
+        <div class="nested-menu">
+            <div *ngIf="isLogged(); else elseBlock" class="list-group">
+                <a class="list-group-item" (click)="addExpandClass('profile')">
+                    <span><i class="fa fa-user"></i>&nbsp;{{getUserData()}}</span>
+                </a>
+            </div>
+            <ng-template #elseBlock>
+                <div class="list-group">
+                    <a routerLink="/login" class="list-group-item">
+                        <i class="fa fa-fw fa-sign-in"></i>Login<b class="caret"></b>
+                    </a>
+                </div>
+            </ng-template>
+            <li class="nested" [class.expand]="showMenu === 'profile'">
+                <ul class="submenu">
+                    <li>
+                        <a class="dropdown-item" routerLink="{{isAdmin()? '/admin' : '/user'}}">
+                            <span><i class="fa fa-fw fa-user"></i>&nbsp;Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" (click)="onLoggedout()">
+                            <span><i class="fa fa-fw fa-power-off"></i>&nbsp;Log Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+    </div>
+    </div>
+</nav>
+<ng-template #adminSiteBlock>
+    <div class="list-group">
+        <a routerLink="/admin/post" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-newspaper-o"></i>&nbsp;Posts
+        </a>
+        <a routerLink="/admin/tag" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-hashtag"></i>&nbsp;Tags
+        </a>
+        <a routerLink="/admin/category" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-tags"></i>&nbsp;Categories
+        </a>
+        <a routerLink="/admin/user" class="list-group-item"><i class="fa fa-fw fa-users"></i>&nbsp;Users</a>
+    </div>
+    <div class="header-fields">
+        <div class="nested-menu">
+            <div *ngIf="isLogged(); else loggedBlock" class="list-group">
+                <a class="list-group-item" (click)="addExpandClass('profile')">
+                    <span><i class="fa fa-user"></i>&nbsp;{{getUserData()}}</span>
+                </a>
+            </div>
+            <ng-template #loggedBlock>
+                <div class="list-group">
+                    <a routerLink="/login" class="list-group-item">
+                        <i class="fa fa-fw fa-sign-in"></i> Login <b class="caret"></b>
+                    </a>
+                </div>
+            </ng-template>
+            <li class="nested" [class.expand]="showMenu === 'profile'">
+                <ul class="submenu">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <span><i class="fa fa-fw fa-user"></i>&nbsp;Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="onLoggedout()">
+                            <span><i class="fa fa-fw fa-power-off"></i>&nbsp;Log Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,27 @@
+<p-fieldset collapsed="false">
+    <p-header>Edit tag</p-header>
+    <form role="form" #tagForm="ngForm">
+        <fieldset class="form-group">
+            <label>Tag name</label>
+            <input class="form-control" [(ngModel)]="editedTag.tagName" name="tag" placeholder="Tag name..." required>
+        </fieldset>
+        <button class="btn btn-success" [disabled]="tagForm.invalid" (click)="updateTag()">Edit</button>
+    </form>
+</p-fieldset>
+<div class="card mb-3 mt-3">
+    <div class="card-header">Posts belong to tag: {{tag.tagName}}</div>
+    <div class="card-body table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Post title (click row to check post details)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="clickable" *ngFor="let post of posts" routerLink="/admin/post/{{post.postId}}">
+                <td>{{post.title}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

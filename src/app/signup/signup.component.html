@@ -1,0 +1,24 @@
+<p-growl></p-growl>
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img class="user-avatar" src="assets/images/logo.png" width="150px" />
+            <h1>Blog by Rafał Czajkowski</h1>
+            <form role="form" #signUpForm="ngForm" (ngSubmit)="signUp()">
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="email" [(ngModel)]="signUpData.email" name="email" class="form-control input-underline input-lg" id="email" placeholder="Email" email required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" [(ngModel)]="signUpData.password" name="password" class="form-control input-underline input-lg" id="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" [(ngModel)]="signUpData.confirmPassword" name="confirmPassword" class="form-control input-underline input-lg" id="confirm-password" placeholder="Confirm Password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn rounded-bottom" [disabled]="signUpForm.invalid || isCorrectPassword()">Sign up</button>
+            </form>
+        </div>
+    </div>
+</div>
